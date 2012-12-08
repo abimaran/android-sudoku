@@ -1,1 +1,1 @@
-Android learning series.
+Android learning series based on the book 'Hello Android, Introducing Google's Mobile Development Platform'
