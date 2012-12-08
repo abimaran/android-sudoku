@@ -1,14 +1,18 @@
 package com.example;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
 public class Sudoku extends Activity implements View.OnClickListener {
+    private static final String TAG = "Sudoku" ;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,7 +36,9 @@ public class Sudoku extends Activity implements View.OnClickListener {
                 Intent i = new Intent(this, About.class);
                 startActivity(i);
                 break;
-            // More buttons go here (if any) ...
+            case R.id.new_button:
+                openNewGameDialog();
+                break;
         }
     }
 
@@ -53,5 +59,23 @@ public class Sudoku extends Activity implements View.OnClickListener {
             // More items go here (if any) ...
         }
         return false;
+    }
+
+    private void openNewGameDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.new_game_title)
+                .setItems(R.array.difficulty,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialoginterface,
+                                                int i) {
+                                startGame(i);
+                            }
+                        })
+                .show();
+    }
+
+    private void startGame(int i) {
+        Log.d(TAG, "clicked on " + i);
+        // Start game here...
     }
 }
